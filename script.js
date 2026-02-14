@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", function(){
   const consoleScreen = document.getElementById("consoleScreen");
   const consoleText = document.getElementById("consoleText");
 
+  /* 🔢 CONTADOR */
   let numero = 0;
   const objetivo = 99999;
 
@@ -20,7 +21,8 @@ document.addEventListener("DOMContentLoaded", function(){
     contador.textContent = numero.toLocaleString();
   }, 15);
 
-const rose =
+  /* 🌹 ROSA */
+  const rose =
 "       :                       ..,,..    ...,,..\n" +
 "      ,%,                .. ,#########::#########:,\n" +
 "      :#%%,           ,,:',####%%%%%%##:`::%%%%####,\n" +
@@ -47,11 +49,9 @@ const rose =
 "        ;#####;;'..;;:::#########::%%#########:\"'\n" +
 "                       ~~~~``````''''~~~\n\n";
 
-
   const commands =
 "> hola no sé que te quiero mucho\n" +
 "> Abdiel\n";
-
 
   giftBtn.addEventListener("click", function(){
 
@@ -64,7 +64,6 @@ const rose =
       startTyping();
     }, 800);
   });
-
 
   function typeBlock(text, className, speed, callback){
 
@@ -87,14 +86,12 @@ const rose =
     typing();
   }
 
-
   function startTyping(){
     consoleText.innerHTML = "";
 
     typeBlock(rose, "rose", 1, function(){
-        typeBlock(commands, "commands", 15);
+      typeBlock(commands, "commands", 15);
     });
-    }
-
+  }
 
 });
