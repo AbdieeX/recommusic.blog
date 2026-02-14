@@ -1,4 +1,3 @@
-*{box-sizing:border-box;}
 body{
   margin:0;
   font-family:Arial,sans-serif;
@@ -15,7 +14,6 @@ body{
 h1{font-size:22px; margin-bottom:10px;}
 h2{font-size:20px; margin-bottom:10px;}
 p{font-size:16px; line-height:1.4; margin:5px 0;}
-.small{font-size:12px;color:#666;margin-top:8px;}
 button{
   margin-top:15px;
   padding:14px 20px;
@@ -28,25 +26,21 @@ button{
   color:white;
   cursor:pointer;
 }
-#argScreen, #finalScreen{display:none; width:100%;}
-
-#pistasContainer{
+#captchaScreen, #finalScreen{display:none; width:100%;}
+#emojiContainer{
   display:flex;
   flex-wrap:wrap;
   justify-content:center;
   margin:15px 0;
 }
-
-.pista{
-  font-size:28px;
-  margin:6px;
+.emoji{
+  font-size:32px;
+  margin:8px;
   cursor:pointer;
   user-select:none;
   transition: transform 0.2s;
 }
-
-.pista.tocado{transform:scale(1.2);}
-
+.emoji.tocado{transform:scale(1.2);}
 pre{
   font-family:Arial,sans-serif;
   font-size:18px;

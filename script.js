@@ -2,53 +2,57 @@ document.addEventListener("DOMContentLoaded", function(){
 
   const mainScreen = document.getElementById("mainScreen");
   const giftBtn = document.getElementById("giftBtn");
-  const argScreen = document.getElementById("argScreen");
-  const pistasContainer = document.getElementById("pistasContainer");
+  const captchaScreen = document.getElementById("captchaScreen");
+  const emojiContainer = document.getElementById("emojiContainer");
   const finalScreen = document.getElementById("finalScreen");
   const finalText = document.getElementById("finalText");
 
-  // Lista de pistas: música, QFB, baile folkrole
-  const pistas = [
-    "💛", "🎵", "🎶", "🎧", // música
-    "🧪", "⚗️", "💊",       // QFB
-    "💃", "🎶🇲🇽"            // folkrole mexicano
-  ];
-  let pistasTocadas = 0;
+  const correctEmojis = ["🎵","🐢","💃"];
+  let selectedEmojis = [];
 
-  // Inicializa el ARG
+  // Lista de emojis random (incluye los correctos)
+  const emojis = ["🎵","🐢","💃","🌟","🍕","💌","🎧","🧪","☕","🪐","🐙","🎶"];
+
   giftBtn.addEventListener("click", ()=>{
     mainScreen.style.display="none";
-    argScreen.style.display="block";
+    captchaScreen.style.display="block";
 
-    pistas.forEach(p=>{
+    emojis.forEach(e=>{
       const span = document.createElement("span");
-      span.textContent = p;
-      span.classList.add("pista");
+      span.textContent = e;
+      span.classList.add("emoji");
       span.addEventListener("click", ()=>{
         if(!span.classList.contains("tocado")){
           span.classList.add("tocado");
-          pistasTocadas++;
-          // Efecto soft: mini confeti
-          span.textContent = p + " ✨";
-          setTimeout(()=>{span.textContent=p},300);
-          // Si encontró todas → carta final
-          if(pistasTocadas === pistas.length){
-            setTimeout(()=>showFinal(),500);
+          selectedEmojis.push(e);
+
+          if(selectedEmojis.length >= correctEmojis.length){
+            // Verifica si seleccionó los correctos
+            const acertó = correctEmojis.every(c => selectedEmojis.includes(c));
+            if(acertó){
+              setTimeout(()=>showFinal(),300);
+            } else {
+              // Si no acierta, resetea suavemente
+              selectedEmojis = [];
+              document.querySelectorAll(".emoji").forEach(em=>{
+                em.classList.remove("tocado");
+              });
+            }
           }
         }
       });
-      pistasContainer.appendChild(span);
+      emojiContainer.appendChild(span);
     });
   });
 
   function showFinal(){
-    argScreen.style.display="none";
+    captchaScreen.style.display="none";
     finalScreen.style.display="block";
     const lines=[
-      "💛 ¡Hola!","",
-      "Solo quería que te divirtieras explorando 🎵",
-      "Eres increíble y me alegra que estés aquí 💌",
-      "Gracias por buscar todas las pistas conmigo 🥰"
+      "💛 ¡Genial!","",
+      "Has encontrado los emojis correctos 🎵🐢💃",
+      "Gracias por jugar conmigo un ratito 😄",
+      "Eres increíble 💌"
     ];
     finalText.textContent="";
     let i=0;
