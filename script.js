@@ -14,13 +14,13 @@ document.addEventListener("DOMContentLoaded", function(){
     "Regla 1: crea tu contraseña inicial (≥7 caracteres, 2 números, 1 caracter especial) 🎯",
     "Regla 2: debe tener tu fecha de nacimiento en formato ??/??/???? 🎂",
     "Regla 3: ingresa tu nombre 'común' en minúsculas",
-    "Regla 4: mejor álbum de Twenty One Pilots en mayúscula 🎵",
+    "Regla 4: mejor álbum de Twenty One Pilots en mayúscula, objetivamente hablando eh no seas poser pls.",
     "Regla 5: debe tener la fecha de hoy en formato ??/??/???? 🗓️",
-    "Regla 6: la edad de Natalia Lafourcade… 😉",
-    "Regla 7: tu carrera mal escrita",
-    "Regla 8: masa atómica del Iridio con dos decimales ⚗️",
+    "Regla 6: la edad de Natalia Lafourcade la mejor como la quiero",
+    "Regla 7: tu carrera mal escrita por un ingeniero medio menso",
+    "Regla 8: masa atómica del Iridio con dos decimales, comprueba q eres una verdadera fcb",
     "Regla 9: completa la frase en mayúsculas: siempre me ganas en todo lo ____",
-    "Regla 10: debe tener la palabra 'tortuga' 🐢"
+    "Regla 10: debe tener la palabra 'tortuga'. NO preguntes."
   ];
 
   let currentStep = 0;
