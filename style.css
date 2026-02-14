@@ -1,17 +1,28 @@
+*{
+  box-sizing:border-box;
+}
+
 body{
   margin:0;
   background:#1e1e2f;
   color:white;
   font-family:Arial, sans-serif;
-  height:100vh;
+  min-height:100vh;
   display:flex;
   justify-content:center;
   align-items:center;
   text-align:center;
+  padding:20px;
 }
 
 #mainScreen{
-  padding:20px;
+  width:100%;
+  max-width:400px;
+}
+
+h1{
+  font-size:20px;
+  line-height:1.4;
 }
 
 #contador{
@@ -20,10 +31,12 @@ body{
 }
 
 button{
-  padding:12px 20px;
+  margin-top:20px;
+  padding:14px 20px;
   font-size:16px;
+  width:100%;
   border:none;
-  border-radius:6px;
+  border-radius:8px;
   background:#ff4ecd;
   color:white;
   cursor:pointer;
@@ -33,31 +46,28 @@ button{
   position:fixed;
   inset:0;
   background:black;
+  display:none;
   justify-content:center;
   align-items:center;
   padding:15px;
-  display:none; /* 🔥 OCULTO POR DEFECTO */
 }
 
 #consoleScreen.active{
-  display:flex; /* 🔥 SOLO APARECE CUANDO SE ACTIVA */
+  display:flex;
 }
 
 .consoleBox{
   width:100%;
-  max-width:500px;
+  max-width:100%;
 }
 
 pre{
   font-family:Courier, monospace;
-  font-size:14px;
-  line-height:1.2;
-  white-space:pre-wrap;
-  text-align:center;
-}
-
-.logo{
-  color:#00aaff;
+  font-size:10px; /* 🔥 más pequeño para que quepa en móvil */
+  line-height:1.1;
+  white-space:pre;
+  text-align:left;
+  overflow-x:auto; /* 🔥 permite scroll horizontal si hace falta */
 }
 
 .rose{
@@ -66,5 +76,6 @@ pre{
 
 .commands{
   color:#00ff88;
-  margin-top:15px;
+  margin-top:10px;
+  text-align:center;
 }
