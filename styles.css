@@ -58,8 +58,8 @@ button:hover{
   white-space: pre;
   color:#ff6b81;
   margin-top:20px;
-  line-height:1.2;
-  font-size:0.9rem;
+  line-height:1.1;
+  font-size:0.7rem;
 }
 
 @keyframes fadeIn{
