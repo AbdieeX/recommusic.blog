@@ -1,70 +1,96 @@
-const giftBtn = document.getElementById("giftBtn");
-const mainScreen = document.getElementById("mainScreen");
-const consoleScreen = document.getElementById("consoleScreen");
-const consoleText = document.getElementById("consoleText");
+document.addEventListener("DOMContentLoaded", function(){
 
-const logo = `
-RecomMusic v1.0
------------------------
-`;
+  const contador = document.getElementById("contador");
+  const giftBtn = document.getElementById("giftBtn");
+  const mainScreen = document.getElementById("mainScreen");
+  const consoleScreen = document.getElementById("consoleScreen");
+  const consoleText = document.getElementById("consoleText");
 
-const rose = `
-       :                       ..,,..    ...,,..
-      ,%,                .. ,#########::#########:,
-      :#%%,           ,,:',####%%%%%%##::%%%%####,
-     ,##%%%%,      ,##%% ,##%%%:::::''%' :::::%%####,
-     %###%%;;,   ,###%%:,##%%:::''    '  . .:::%%###,
-    :####%%;;:: ,##%:' ,#%::''   .,,,..    . .::%%%##,
-    %####%;;::,##%:' ,##%''  ,%%########%     . :::%%##,
-    ######:::,##%:',####:  ,##%%:''     %% ,     .::%%##,
-                       ~~~~~~~~~~~~~~~
-`;
+  /* 🔢 CONTADOR */
+  let numero = 0;
+  const objetivo = 99999;
 
-const commands = `
-> hola no sé que te quiero mucho
-> Abdiel
-`;
+  const intervalo = setInterval(function(){
+    numero += 1379;
 
-giftBtn.addEventListener("click", function(){
-
-  giftBtn.disabled = true;
-  giftBtn.innerText = "Cargando regalo...";
-
-  setTimeout(() => {
-    mainScreen.classList.add("hidden");
-    consoleScreen.classList.remove("hidden");
-    startTyping();
-  }, 800);
-});
-
-
-function typeText(text, className, speed, callback){
-  let container = document.createElement("div");
-  if(className) container.classList.add(className);
-  consoleText.appendChild(container);
-
-  let i = 0;
-
-  function typing(){
-    if(i < text.length){
-      container.textContent += text[i];
-      i++;
-      setTimeout(typing, speed);
-    } else if(callback){
-      callback();
+    if(numero >= objetivo){
+      numero = objetivo;
+      clearInterval(intervalo);
     }
+
+    contador.textContent = numero.toLocaleString();
+  }, 15);
+
+
+  /* 🖥 LOGO */
+  const logo =
+"██████╗ ███████╗ ██████╗ ██████╗ ███╗   ███╗\n" +
+"██╔══██╗██╔════╝██╔════╝██╔═══██╗████╗ ████║\n" +
+"██████╔╝█████╗  ██║     ██║   ██║██╔████╔██║\n" +
+"██╔══██╗██╔══╝  ██║     ██║   ██║██║╚██╔╝██║\n" +
+"██║  ██║███████╗╚██████╗╚██████╔╝██║ ╚═╝ ██║\n" +
+"╚═╝  ╚═╝╚══════╝ ╚═════╝ ╚═════╝ ╚═╝     ╚═╝\n\n";
+
+  /* 🌹 ROSA */
+  const rose =
+"       :                       ..,,..    ...,,..\n" +
+"      ,%,                .. ,#########::#########:, \n" +
+"      :#%%,           ,,:',####%%%%%%##::%%%%####,\n" +
+"     ,##%%%%,      ,##%% ,##%%%:::::''%' :::::%%####,\n" +
+"     %###%%;;,   ,###%%:,##%%:::''    '  . .:::%%###,\n" +
+"    :####%%;;:: ,##%:' ,#%::''   .,,,..    . .::%%%##,\n" +
+"    %####%;;::,##%:' ,##%''  ,%%########%     . :::%%##,\n" +
+"    ######:::,##%:',####:  ,##%%:''     %% ,     .::%%##,\n" +
+"                       ~~~~~~~~~~~~~~~\n\n";
+
+  const commands =
+"> hola no sé que te quiero mucho\n" +
+"> Abdiel\n";
+
+
+  giftBtn.addEventListener("click", function(){
+
+    giftBtn.disabled = true;
+    giftBtn.innerText = "Cargando regalo...";
+
+    setTimeout(function(){
+      mainScreen.classList.add("hidden");
+      consoleScreen.classList.remove("hidden");
+      startTyping();
+    }, 800);
+  });
+
+
+  function typeBlock(text, className, speed, callback){
+
+    const div = document.createElement("div");
+    if(className) div.className = className;
+    consoleText.appendChild(div);
+
+    let i = 0;
+
+    function typing(){
+      if(i < text.length){
+        div.textContent += text.charAt(i);
+        i++;
+        setTimeout(typing, speed);
+      } else if(callback){
+        callback();
+      }
+    }
+
+    typing();
   }
 
-  typing();
-}
 
+  function startTyping(){
+    consoleText.innerHTML = "";
 
-function startTyping(){
-  consoleText.innerHTML = "";
-
-  typeText(logo, null, 5, function(){
-    typeText(rose, "rose", 1, function(){
-      typeText(commands, "commands", 15);
+    typeBlock(logo, "logo", 2, function(){
+      typeBlock(rose, "rose", 1, function(){
+        typeBlock(commands, "commands", 15);
+      });
     });
-  });
-}
+  }
+
+});
