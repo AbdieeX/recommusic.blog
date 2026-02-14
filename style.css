@@ -46,10 +46,11 @@ button{
 
 pre{
   font-family:Courier, monospace;
-  font-size:12px;
+  font-size:14px;
   line-height:1.2;
   white-space:pre-wrap;
   text-align:center;
+  color:#00ff88;
 }
 
 .logo{
