@@ -9,17 +9,17 @@ document.addEventListener("DOMContentLoaded", function(){
   const finalScreen = document.getElementById("finalScreen");
   const finalText = document.getElementById("finalText");
 
+  // Ahora 10 pasos sin paso 0
   const steps = [
-    "Regla 1: crea tu contraseña inicial (≥7 caracteres, 2 números, 1 caracter especial) 🎯",
-    "Regla 2: debe tener tu fecha de nacimiento en formato ??/??/???? 🎂",
-    "Regla 3: ingresa tu nombre 'común' en minúsculas",
-    "Regla 4: mejor álbum de Twenty One Pilots en mayúscula, objetivamente hablando eh no seas poser pls.",
-    "Regla 5: debe tener la fecha de hoy en formato ??/??/???? 🗓️",
-    "Regla 6: la edad de Natalia Lafourcade la mejor como la quiero",
-    "Regla 7: tu carrera mal escrita en minúsculas por un ingeniero medio menso",
-    "Regla 8: masa atómica del Iridio con dos decimales, comprueba q eres una verdadera fcb",
-    "Regla 9: completa la frase en mayúsculas: siempre me ganas en todo lo ____",
-    "Regla 10: debe tener la palabra 'tortuga'. NO preguntes."
+    "Regla 1: debe tener tu fecha de nacimiento en formato ??/??/???? 🎂",
+    "Regla 2: ingresa tu nombre 'común' en minúsculas",
+    "Regla 3: mejor álbum de Twenty One Pilots en mayúscula, objetivamente hablando eh no seas poser pls.",
+    "Regla 4: debe tener la fecha de hoy en formato ??/??/???? 🗓️",
+    "Regla 5: la edad de Natalia Lafourcade la mejor como la quiero",
+    "Regla 6: tu carrera mal escrita en minúsculas por un ingeniero medio menso",
+    "Regla 7: masa atómica del Iridio con dos decimales, comprueba q eres una verdadera fcb",
+    "Regla 8: completa la frase en mayúsculas: siempre me ganas en todo lo ____",
+    "Regla 9: debe tener la palabra 'tortuga'. NO preguntes."
   ];
 
   let currentStep = 0;
@@ -44,22 +44,8 @@ document.addEventListener("DOMContentLoaded", function(){
       return;
     }
 
-    // Paso 0: contraseña inicial
-    if(currentStep === 0){
-        if(!/^.*(?=.{7,})(?=(?:.*\d){2,})(?=.*[!@#$%^&*-]).*$/.test(inputVal)){
-            passwordMsg.textContent = "Debe tener ≥7 caracteres, 2 números y 1 caracter especial...";
-            return;
-        }
-        // Ahora guardamos el valor completo del input en passwordParts[0]
-        passwordParts[currentStep] = inputVal;
-        // El input ya será la base para los pasos siguientes
-        currentStep++;
-        showStep();
-        return;
-    }
-
-    // Pasos 1–10: input debe incluir todo lo anterior + nueva parte
-    passwordParts[currentStep] = inputVal;  // guardamos todo lo que hay en el input
+    // Guardamos todo el input acumulativo
+    passwordParts[currentStep] = inputVal;
     currentStep++;
 
     if(currentStep < steps.length){
@@ -67,16 +53,15 @@ document.addEventListener("DOMContentLoaded", function(){
     } else {
         passwordScreen.style.display="none";
         finalScreen.style.display="block";
-        const finalPassword = passwordParts[passwordParts.length - 1]; // el input final ya tiene todo
+        const finalPassword = passwordParts[passwordParts.length - 1]; // último input ya tiene todo
         showFinalText(finalPassword === expectedPassword);
     }
-});
-
+  });
 
   function showStep(){
     passwordStep.textContent = steps[currentStep];
     passwordMsg.textContent = "";
-    // NO borramos el input, así el usuario ve todo lo que escribió
+    // NO borramos el input, el usuario ve todo lo que escribió
     passwordInput.focus();
   }
 
