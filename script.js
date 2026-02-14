@@ -14,11 +14,11 @@ document.addEventListener("DOMContentLoaded", function(){
     "Paso 2: ingresa tu nombre en minúsculas",
     "Paso 3: mejor álbum de Twenty One Pilots en mayúscula, objetivamente hablando eh no seas poser pls.",
     "Paso 4: debe tener la fecha de hoy en formato ??/??/????",
-    "Paso 5: la edad de Natalia Lafourcade la mejor como la quiero",
-    "Paso 6: las siglas de tu carrera mal escritas en minúsculas por un ingeniero medio menso",
+    "Paso 5: la edad de Natalia Lafourcade, la mejor como la quiero",
+    "Paso 6: escribe las siglas de tu carrera tal como las escribiría un ingeniero medio menso, en minúsculas",
     "Paso 7: masa atómica del Iridio con dos decimales, comprueba q eres una verdadera fcb",
     "Paso 8: completa la frase en mayúsculas: siempre me ganas en todo lo ____",
-    "Paso 9: debe tener la palabra 'tortuga'. NO preguntes."
+    "Paso 9: debe tener la palabra 'tortuga'. No preguntes."
   ];
 
   const stepLengths = [10, 7, 6, 10, 2, 3, 6, 4, 7]; // longitudes de cada paso en expectedPassword
