@@ -50,14 +50,16 @@ document.addEventListener("DOMContentLoaded", function(){
             passwordMsg.textContent = "Debe tener ≥7 caracteres, 2 números y 1 caracter especial...";
             return;
         }
+        // Ahora guardamos el valor completo del input en passwordParts[0]
         passwordParts[currentStep] = inputVal;
+        // El input ya será la base para los pasos siguientes
         currentStep++;
         showStep();
         return;
     }
 
-    // Pasos 1–10: el input debe incluir todo lo anterior + nueva parte
-    passwordParts[currentStep] = inputVal;
+    // Pasos 1–10: input debe incluir todo lo anterior + nueva parte
+    passwordParts[currentStep] = inputVal;  // guardamos todo lo que hay en el input
     currentStep++;
 
     if(currentStep < steps.length){
@@ -65,10 +67,11 @@ document.addEventListener("DOMContentLoaded", function(){
     } else {
         passwordScreen.style.display="none";
         finalScreen.style.display="block";
-        const finalPassword = passwordParts[passwordParts.length - 1]; // Última entrada ya tiene todo
+        const finalPassword = passwordParts[passwordParts.length - 1]; // el input final ya tiene todo
         showFinalText(finalPassword === expectedPassword);
     }
-  });
+});
+
 
   function showStep(){
     passwordStep.textContent = steps[currentStep];
