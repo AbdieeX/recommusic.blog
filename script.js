@@ -9,7 +9,6 @@ document.addEventListener("DOMContentLoaded", function(){
   const finalScreen = document.getElementById("finalScreen");
   const finalText = document.getElementById("finalText");
 
-  // Los 10 pasos del juego
   const steps = [
     "Regla 1: crea tu contraseña inicial (≥7 caracteres, 2 números, 1 caracter especial) 🎯",
     "Regla 2: debe tener tu fecha de nacimiento en formato ??/??/???? 🎂",
@@ -17,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function(){
     "Regla 4: mejor álbum de Twenty One Pilots en mayúscula, objetivamente hablando eh no seas poser pls.",
     "Regla 5: debe tener la fecha de hoy en formato ??/??/???? 🗓️",
     "Regla 6: la edad de Natalia Lafourcade la mejor como la quiero",
-    "Regla 7: tu carrera mal escrita por un ingeniero medio menso",
+    "Regla 7: tu carrera mal escrita en minúsculas por un ingeniero medio menso",
     "Regla 8: masa atómica del Iridio con dos decimales, comprueba q eres una verdadera fcb",
     "Regla 9: completa la frase en mayúsculas: siempre me ganas en todo lo ____",
     "Regla 10: debe tener la palabra 'tortuga'. NO preguntes."
@@ -26,7 +25,6 @@ document.addEventListener("DOMContentLoaded", function(){
   let currentStep = 0;
   let passwordParts = [];
 
-  // Contraseña final exacta para validar
   const expectedPassword = "29/01/2006valeriaTRENCH14/02/202641fcb192.22MALOtortuga";
 
   giftBtn.addEventListener("click", ()=>{
@@ -34,50 +32,48 @@ document.addEventListener("DOMContentLoaded", function(){
     passwordScreen.style.display="block";
     currentStep = 0;
     passwordParts = [];
+    passwordInput.value = "";
     showStep();
   });
 
   passwordBtn.addEventListener("click", ()=>{
     const inputVal = passwordInput.value.trim();
-    
+
     if(inputVal.length < 1){
       passwordMsg.textContent = "Ups, no puede estar vacío 😅";
       return;
     }
 
-    // Validación de la primera regla (contraseña inicial)
+    // Paso 0: contraseña inicial
     if(currentStep === 0){
         if(!/^.*(?=.{7,})(?=(?:.*\d){2,})(?=.*[!@#$%^&*-]).*$/.test(inputVal)){
             passwordMsg.textContent = "Debe tener ≥7 caracteres, 2 números y 1 caracter especial...";
             return;
         }
-        // Guardamos la contraseña inicial sin compararla con expectedPassword
         passwordParts[currentStep] = inputVal;
         currentStep++;
         showStep();
         return;
     }
 
-    // Para los demás pasos, solo guardamos el valor y pasamos al siguiente paso
+    // Pasos 1–10: el input debe incluir todo lo anterior + nueva parte
     passwordParts[currentStep] = inputVal;
     currentStep++;
 
-
-        if(currentStep < steps.length){
-          showStep();
-        } else {
-          passwordScreen.style.display="none";
-          finalScreen.style.display="block";
-          const finalPassword = passwordParts.join('');
-          showFinalText(finalPassword === expectedPassword);
-        }
-    });
-
+    if(currentStep < steps.length){
+        showStep();
+    } else {
+        passwordScreen.style.display="none";
+        finalScreen.style.display="block";
+        const finalPassword = passwordParts[passwordParts.length - 1]; // Última entrada ya tiene todo
+        showFinalText(finalPassword === expectedPassword);
+    }
+  });
 
   function showStep(){
     passwordStep.textContent = steps[currentStep];
     passwordMsg.textContent = "";
-    passwordInput.value = passwordParts[currentStep] || "";
+    // NO borramos el input, así el usuario ve todo lo que escribió
     passwordInput.focus();
   }
 
