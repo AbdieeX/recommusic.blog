@@ -3,6 +3,11 @@ const mainScreen = document.getElementById("mainScreen");
 const consoleScreen = document.getElementById("consoleScreen");
 const consoleText = document.getElementById("consoleText");
 
+const logo = `
+RecomMusic v1.0
+-----------------------
+`;
+
 const rose = `
        :                       ..,,..    ...,,..
       ,%,                .. ,#########::#########:,
@@ -28,25 +33,25 @@ giftBtn.addEventListener("click", function(){
   setTimeout(() => {
     mainScreen.classList.add("hidden");
     consoleScreen.classList.remove("hidden");
-
-    typeRose();
-  }, 1000);
+    startTyping();
+  }, 800);
 });
 
 
-function typeRose(){
-  let i = 0;
-  consoleText.innerHTML = "<span class='rose'></span>";
+function typeText(text, className, speed, callback){
+  let container = document.createElement("div");
+  if(className) container.classList.add(className);
+  consoleText.appendChild(container);
 
-  const roseContainer = document.querySelector(".rose");
+  let i = 0;
 
   function typing(){
-    if(i < rose.length){
-      roseContainer.textContent += rose[i];
+    if(i < text.length){
+      container.textContent += text[i];
       i++;
-      setTimeout(typing, 8);
-    } else {
-      typeCommands();
+      setTimeout(typing, speed);
+    } else if(callback){
+      callback();
     }
   }
 
@@ -54,19 +59,12 @@ function typeRose(){
 }
 
 
-function typeCommands(){
-  let i = 0;
-  const cmdContainer = document.createElement("div");
-  cmdContainer.classList.add("commands");
-  consoleText.appendChild(cmdContainer);
+function startTyping(){
+  consoleText.innerHTML = "";
 
-  function typing(){
-    if(i < commands.length){
-      cmdContainer.textContent += commands[i];
-      i++;
-      setTimeout(typing, 30);
-    }
-  }
-
-  typing();
+  typeText(logo, null, 5, function(){
+    typeText(rose, "rose", 1, function(){
+      typeText(commands, "commands", 15);
+    });
+  });
 }

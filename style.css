@@ -1,54 +1,17 @@
 body{
   margin:0;
+  background:#1e1e2f;
+  color:white;
   font-family:Arial, sans-serif;
   height:100vh;
   display:flex;
   justify-content:center;
   align-items:center;
-  background:#1e1e2f;
-  color:white;
+  text-align:center;
 }
 
-/* Pantalla normal */
 #mainScreen{
-  text-align:center;
-}
-
-/* Consola */
-#consoleScreen{
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  background:black;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-}
-
-.consoleContent{
-  text-align:center;
-}
-
-pre{
-  font-family: "Courier New", monospace;
-  font-size:14px;
-  line-height:1.2;
-  white-space:pre;
-}
-
-.rose{
-  color:#ff2e2e;
-}
-
-.commands{
-  color:#00ff88;
-  margin-top:20px;
-}
-
-.hidden{
-  display:none !important;
+  padding:20px;
 }
 
 button{
@@ -59,4 +22,43 @@ button{
   background:#ff4ecd;
   color:white;
   cursor:pointer;
+}
+
+#consoleScreen{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:black;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:15px;
+}
+
+.consoleContent{
+  width:100%;
+  max-width:500px;
+}
+
+pre{
+  font-family:Courier, monospace;
+  font-size:12px;
+  line-height:1.2;
+  white-space:pre;
+  text-align:center;
+}
+
+.rose{
+  color:#ff2e2e;
+}
+
+.commands{
+  color:#00ff88;
+  margin-top:15px;
+}
+
+.hidden{
+  display:none;
 }
