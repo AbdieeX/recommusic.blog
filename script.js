@@ -78,12 +78,12 @@ document.addEventListener("DOMContentLoaded", function(){
 
     if(correct){
       lines.push("¡descubriste la contraseña!");
-      lines.push("quise hacerte un pequeño detalle para hoy.");
+      lines.push("quise hacerte un pequeño detalle para sacarte una sonrisa hoy.");
       lines.push("");
       lines.push("Lindo 14 de Febrero, Vale. ❤️");
       lines.push("");
       lines.push("gracias por participar en esta tontería que se me ocurrió (no, no es un virus).");
-      lines.push("tqmmmm, me encantaría verte más seguido en la uni.");
+      lines.push("tqm muchisimo, me encantaría verte más seguido en la uni.");
       lines.push("te debo unas flores bonitas, pero por ahora te mando un emoji (de unas flores bonitas)");
       lines.push("");
       lines.push("💐");
