@@ -10,15 +10,15 @@ document.addEventListener("DOMContentLoaded", function(){
   const finalText = document.getElementById("finalText");
 
   const steps = [
-    "Regla 1: debe tener tu fecha de nacimiento en formato ??/??/???? 🎂",
-    "Regla 2: ingresa tu nombre 'común' en minúsculas",
-    "Regla 3: mejor álbum de Twenty One Pilots en mayúscula, objetivamente hablando eh no seas poser pls.",
-    "Regla 4: debe tener la fecha de hoy en formato ??/??/???? 🗓️",
-    "Regla 5: la edad de Natalia Lafourcade la mejor como la quiero",
-    "Regla 6: tu carrera mal escrita en minúsculas por un ingeniero medio menso",
-    "Regla 7: masa atómica del Iridio con dos decimales, comprueba q eres una verdadera fcb",
-    "Regla 8: completa la frase en mayúsculas: siempre me ganas en todo lo ____",
-    "Regla 9: debe tener la palabra 'tortuga'. NO preguntes."
+    "Paso 1: debe tener tu fecha de nacimiento en formato ??/??/????",
+    "Paso 2: ingresa tu nombre en minúsculas",
+    "Paso 3: mejor álbum de Twenty One Pilots en mayúscula, objetivamente hablando eh no seas poser pls.",
+    "Paso 4: debe tener la fecha de hoy en formato ??/??/????",
+    "Paso 5: la edad de Natalia Lafourcade la mejor como la quiero",
+    "Paso 6: las siglas de tu carrera mal escritas en minúsculas por un ingeniero medio menso",
+    "Paso 7: masa atómica del Iridio con dos decimales, comprueba q eres una verdadera fcb",
+    "Paso 8: completa la frase en mayúsculas: siempre me ganas en todo lo ____",
+    "Paso 9: debe tener la palabra 'tortuga'. NO preguntes."
   ];
 
   const stepLengths = [10, 7, 6, 10, 2, 3, 6, 4, 7]; // longitudes de cada paso en expectedPassword
@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function(){
     const inputVal = passwordInput.value.trim();
 
     if(inputVal.length < 1){
-      passwordMsg.textContent = "Ups, no puede estar vacío 😅";
+      passwordMsg.textContent = "Ups, no puede estar vacío...";
       return;
     }
 
@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", function(){
     const userStepPart = inputVal.slice(-stepLengths[currentStep]);
 
     if(userStepPart !== expectedStepPart){
-      passwordMsg.textContent = "Algo no coincide con la parte de la contraseña de este paso 😅";
+      passwordMsg.textContent = "Algo no coincide con la parte de la contraseña de este paso...";
       return;
     }
 
@@ -77,19 +77,24 @@ document.addEventListener("DOMContentLoaded", function(){
     const lines = [];
 
     if(correct){
-      lines.push("¡Felicidades! 🎉");
-      lines.push("Tu contraseña secreta es EXACTAMENTE la correcta 😎");
+      lines.push("¡descubriste la contraseña!");
+      lines.push("quise hacerte un pequeño detalle para hoy.");
       lines.push("");
-      lines.push("No la compartas con nadie… aunque si la compartes conmigo está bien 😏");
+      lines.push("Lindo 14 de Febrero, Vale. 🩷");
       lines.push("");
-      lines.push("Gracias por jugar al Password Game 💌");
-      lines.push("Recuerda: RecomMusic nunca tuvo promociones reales");
-      lines.push("pero sí tiene algo mejor… tú 🎵💛");
+      lines.push("gracias por participar en esta tontería que se me ocurrió (no, no es un virus).");
+      lines.push("tqmmmm, me encantaría verte más seguido en la uni.");
+      lines.push("te debo unas flores bonitas, pero por ahora te mando un emoji (de unas flores bonitas)");
+      lines.push("");
+      lines.push("💐");
+      lines.push("");
+      lines.push("- Abdiel");
+
     } else {
       lines.push("¡Ups! ❌");
-      lines.push("Tu contraseña NO coincide con la esperada 😅");
+      lines.push("Tu contraseña NO coincide con la esperada...");
       lines.push("");
-      lines.push("Intenta de nuevo y no te rindas 💪");
+      lines.push("Intenta de nuevo y no te rindas.");
     }
 
     finalText.textContent = "";
