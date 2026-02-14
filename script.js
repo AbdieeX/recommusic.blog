@@ -3,7 +3,7 @@ let numero = 0;
 let objetivo = 99999;
 let contador = document.getElementById("contador");
 
-let intervalo = setInterval(() => {
+let intervalo = setInterval(function() {
   numero += 1234;
 
   if (numero >= objetivo) {
@@ -15,7 +15,7 @@ let intervalo = setInterval(() => {
 }, 20);
 
 
-// ✨ EDITA ESTE MENSAJE ✨
+// ✨ CAMBIA ESTE MENSAJE ✨
 let mensajeFinal = "Feliz 14 ✨\nGracias por ser mi recomendación favorita.";
 
 
@@ -25,7 +25,7 @@ function reclamar(){
 "        _-_\n" +
 "     /           \\\n" +
 "    |    \\  /      |\n" +
-"    |     \\()/       |\n" +
+"    |     \\()/      |\n" +
 "     \\     (    )     /\n" +
 "      \\      '----'    /\n" +
 "        \\___________/\n\n" +
