@@ -49,29 +49,9 @@ button{
   cursor:pointer;
 }
 
-#captchaScreen, #finalScreen{
-  display:none;
+#passwordScreen, #finalScreen{
+  display:none; /* ocultas por defecto */
   width:100%;
-}
-
-#captchaOptions{
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:center;
-  margin:10px 0;
-}
-
-.captchaEmoji{
-  font-size:28px;
-  margin:6px;
-  cursor:pointer;
-  user-select:none;
-}
-
-.captchaEmoji.selected{
-  transform:scale(1.2);
-  background:#ff4ecd33;
-  border-radius:6px;
 }
 
 pre{

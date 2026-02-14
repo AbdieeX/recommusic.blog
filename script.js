@@ -29,6 +29,7 @@ document.addEventListener("DOMContentLoaded", function(){
   // Contraseña final exacta para validar
   const expectedPassword = "29/01/2006valeriaTRENCH14/02/202641fcb192.22MALO";
 
+  // Inicia el juego desde la pantalla inicial
   giftBtn.addEventListener("click", ()=>{
     mainScreen.style.display="none";
     passwordScreen.style.display="block";
@@ -40,8 +41,8 @@ document.addEventListener("DOMContentLoaded", function(){
   passwordBtn.addEventListener("click", ()=>{
     const inputVal = passwordInput.value.trim();
 
+    // Validar contraseña inicial
     if(currentStep === 0){
-      // Validar contraseña inicial: ≥7 caracteres, 2 números, 1 especial
       if(!/^.*(?=.{7,})(?=(?:.*\d){2,})(?=.*[!@#$%^&*]).*$/.test(inputVal)){
         passwordMsg.textContent = "Debe tener ≥7 caracteres, 2 números y 1 caracter especial 😅";
         return;
@@ -58,10 +59,11 @@ document.addEventListener("DOMContentLoaded", function(){
     if(currentStep < steps.length){
       showStep();
     } else {
-      // Concatenar todas las partes menos la primera
-      const finalPassword = passwordParts.slice(1).join('');
       passwordScreen.style.display="none";
       finalScreen.style.display="block";
+
+      // Concatenar todos los pasos excepto la contraseña inicial
+      const finalPassword = passwordParts.slice(1).join('');
       showFinalText(finalPassword === expectedPassword);
     }
   });
