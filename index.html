@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>RecomMusic</title>
+
+<style>
+body{
+  margin:0;
+  background:black;
+  color:white;
+  font-family: Arial, sans-serif;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+  text-align:center;
+}
+
+.container{
+  max-width:500px;
+  padding:20px;
+}
+
+img{
+  width:180px;
+  margin-bottom:20px;
+}
+
+button{
+  margin-top:20px;
+  padding:12px 25px;
+  font-size:16px;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+  background:#ff004c;
+  color:white;
+  transition:0.3s;
+}
+
+button:hover{
+  background:#ff3366;
+  transform:scale(1.05);
+}
+</style>
+</head>
+
+<body>
+
+<div class="container" id="contenido">
+
+  <img src="LOGO_AQUI.png" alt="RecomMusic Logo">
+
+  <h2>🎉 ¡Felicidades!</h2>
+  <p>Eres la visitante número <b>99999</b> de RecomMusic.</p>
+  <p>Pulsa el botón para reclamar tu regalo especial.</p>
+
+  <button onclick="reclamar()">Reclamar regalo</button>
+
+</div>
+
+<script>
+function reclamar(){
+  document.getElementById("contenido").innerHTML =
+  "<h1>💌 Premio desbloqueado 💌</h1>" +
+  "<p>Tu regalo no es un descuento.</p>" +
+  "<p>No es una membresía premium.</p>" +
+  "<p>Es esto:</p>" +
+  "<h2>Feliz 14 ✨</h2>" +
+  "<p>Gracias por ser mi recomendación favorita.</p>";
+}
+</script>
+
+</body>
+</html>
