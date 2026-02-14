@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function(){
 
     // Validar contraseña inicial
     if(currentStep === 0){
-      if(!/^.*(?=.{7,})(?=(?:.*\d){2,})(?=.*[!@#$%^&*]).*$/.test(inputVal)){
+      if(!/^.*(?=.{7,})(?=(?:.*\d){2,})(?=.*[!@#$%^&*-]).*$/.test(inputVal)){
         passwordMsg.textContent = "Debe tener ≥7 caracteres, 2 números y 1 caracter especial 😅";
         return;
       }
