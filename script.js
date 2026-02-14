@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", function(){
     // Validación de la primera regla (contraseña inicial)
     if(currentStep === 0){
         if(!/^.*(?=.{7,})(?=(?:.*\d){2,})(?=.*[!@#$%^&*-]).*$/.test(inputVal)){
-            passwordMsg.textContent = "Debe tener ≥7 caracteres, 2 números y 1 caracter especial 😅";
+            passwordMsg.textContent = "Debe tener ≥7 caracteres, 2 números y 1 caracter especial...";
             return;
         }
         // Guardamos la contraseña inicial sin compararla con expectedPassword
@@ -58,27 +58,20 @@ document.addEventListener("DOMContentLoaded", function(){
         return;
     }
 
-    // Para los demás pasos, vamos construyendo la contraseña y validando parcialmente
+    // Para los demás pasos, solo guardamos el valor y pasamos al siguiente paso
     passwordParts[currentStep] = inputVal;
-    const currentPassword = passwordParts.join('');
-    const expectedUpToNow = expectedPassword.slice(passwordParts[0].length, currentPassword.length);
-
-    if(currentStep > 0 && currentPassword.slice(passwordParts[0].length) !== expectedUpToNow){
-        passwordMsg.textContent = "Algo no coincide con la contraseña esperada 😅";
-        return;
-    }
-
     currentStep++;
 
-    if(currentStep < steps.length){
-      showStep();
-    } else {
-      passwordScreen.style.display="none";
-      finalScreen.style.display="block";
-      const finalPassword = passwordParts.join('');
-      showFinalText(finalPassword === expectedPassword);
-    }
-});
+
+        if(currentStep < steps.length){
+          showStep();
+        } else {
+          passwordScreen.style.display="none";
+          finalScreen.style.display="block";
+          const finalPassword = passwordParts.join('');
+          showFinalText(finalPassword === expectedPassword);
+        }
+    });
 
 
   function showStep(){
