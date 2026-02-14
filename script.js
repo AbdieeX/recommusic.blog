@@ -9,7 +9,6 @@ document.addEventListener("DOMContentLoaded", function(){
   const finalScreen = document.getElementById("finalScreen");
   const finalText = document.getElementById("finalText");
 
-  // Ahora 10 pasos sin paso 0
   const steps = [
     "Regla 1: debe tener tu fecha de nacimiento en formato ??/??/???? 🎂",
     "Regla 2: ingresa tu nombre 'común' en minúsculas",
@@ -44,17 +43,44 @@ document.addEventListener("DOMContentLoaded", function(){
       return;
     }
 
-    // Guardamos todo el input acumulativo
+    // Calculamos la posición que corresponde a este paso
+    const prevLength = passwordParts.join('').length;
+    let stepLength = 0;
+
+    // Definimos cuánto mide cada paso en expectedPassword
+    switch(currentStep){
+      case 0: stepLength = "29/01/2006".length; break;
+      case 1: stepLength = "valeria".length; break;
+      case 2: stepLength = "TRENCH".length; break;
+      case 3: stepLength = "14/02/2026".length; break;
+      case 4: stepLength = "41".length; break;
+      case 5: stepLength = "fcb".length; break;
+      case 6: stepLength = "192.22".length; break;
+      case 7: stepLength = "MALO".length; break;
+      case 8: stepLength = "tortuga".length; break;
+    }
+
+    const expectedStepPart = expectedPassword.slice(prevLength, prevLength + stepLength);
+
+    // Validamos que el input acumulativo contenga la parte correcta al final
+    const userStepPart = inputVal.slice(prevLength, prevLength + stepLength);
+
+    if(userStepPart !== expectedStepPart){
+      passwordMsg.textContent = "Algo no coincide con la parte de la contraseña de este paso 😅";
+      return;
+    }
+
+    // Guardamos todo el input como el nuevo acumulado
     passwordParts[currentStep] = inputVal;
     currentStep++;
 
     if(currentStep < steps.length){
-        showStep();
+      showStep();
     } else {
-        passwordScreen.style.display="none";
-        finalScreen.style.display="block";
-        const finalPassword = passwordParts[passwordParts.length - 1]; // último input ya tiene todo
-        showFinalText(finalPassword === expectedPassword);
+      passwordScreen.style.display="none";
+      finalScreen.style.display="block";
+      const finalPassword = passwordParts[passwordParts.length - 1]; // input final ya tiene todo
+      showFinalText(finalPassword === expectedPassword);
     }
   });
 
