@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function(){
   const objetivo = 99999;
 
   const intervalo = setInterval(function(){
-    numero += 1379;
+    numero += 1500;
 
     if(numero >= objetivo){
       numero = objetivo;
@@ -54,8 +54,8 @@ document.addEventListener("DOMContentLoaded", function(){
     giftBtn.innerText = "Cargando regalo...";
 
     setTimeout(function(){
-      mainScreen.classList.add("hidden");
-      consoleScreen.classList.remove("hidden");
+      mainScreen.style.display = "none";
+      consoleScreen.classList.add("active");
       startTyping();
     }, 800);
   });

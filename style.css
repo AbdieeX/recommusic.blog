@@ -33,10 +33,14 @@ button{
   position:fixed;
   inset:0;
   background:black;
-  display:flex;
   justify-content:center;
   align-items:center;
   padding:15px;
+  display:none; /* 🔥 OCULTO POR DEFECTO */
+}
+
+#consoleScreen.active{
+  display:flex; /* 🔥 SOLO APARECE CUANDO SE ACTIVA */
 }
 
 .consoleBox{
@@ -50,7 +54,6 @@ pre{
   line-height:1.2;
   white-space:pre-wrap;
   text-align:center;
-  color:#00ff88;
 }
 
 .logo{
@@ -64,8 +67,4 @@ pre{
 .commands{
   color:#00ff88;
   margin-top:15px;
-}
-
-.hidden{
-  display:none;
 }
