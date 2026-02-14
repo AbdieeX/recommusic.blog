@@ -92,11 +92,10 @@ const rose =
   function startTyping(){
     consoleText.innerHTML = "";
 
-    typeBlock(logo, "logo", 2, function(){
-      typeBlock(rose, "rose", 1, function(){
+    typeBlock(rose, "rose", 1, function(){
         typeBlock(commands, "commands", 15);
-      });
     });
-  }
+    }
+
 
 });
