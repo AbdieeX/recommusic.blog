@@ -41,19 +41,78 @@ document.addEventListener("DOMContentLoaded", function(){
   passwordBtn.addEventListener("click", ()=>{
     const inputVal = passwordInput.value.trim();
 
-    // Validar contraseña inicial
-    if(currentStep === 0){
-      if(!/^.*(?=.{7,})(?=(?:.*\d){2,})(?=.*[!@#$%^&*-]).*$/.test(inputVal)){
-        passwordMsg.textContent = "Debe tener ≥7 caracteres, 2 números y 1 caracter especial 😅";
-        return;
-      }
-    } else if(inputVal.length < 1){
-      passwordMsg.textContent = "Ups, no puede estar vacío 😅";
-      return;
+    // Validar según el paso actual
+    let valid = true;
+    let msg = "";
+
+    switch(currentStep) {
+      case 0: // Contraseña inicial
+        if(!/^.*(?=.{7,})(?=(?:.*\d){2,})(?=.*[!@#$%^&*-]).*$/.test(inputVal)){
+          valid = false;
+          msg = "Debe tener ≥7 caracteres, 2 números y 1 caracter especial 😅";
+        }
+        break;
+      case 1: // Fecha de nacimiento
+        if(inputVal !== "29/01/2006") { 
+          valid = false;
+          msg = "Fecha incorrecta 😅";
+        }
+        break;
+      case 2: // Nombre completo
+        if(inputVal.toLowerCase() !== "valeria") {
+          valid = false;
+          msg = "No coincide con tu nombre completo 😎";
+        }
+        break;
+      case 3: // Mejor álbum de Twenty One Pilots
+        if(inputVal.toUpperCase() !== "TRENCH") {
+          valid = false;
+          msg = "No es el álbum correcto 🎵";
+        }
+        break;
+      case 4: // Fecha de hoy
+        if(inputVal !== "14/02/2026") {
+          valid = false;
+          msg = "Debes escribir la fecha de hoy literal 🗓️";
+        }
+        break;
+      case 5: // Edad de Natalia Lafourcade
+        if(inputVal !== "41") {
+          valid = false;
+          msg = "Edad incorrecta 😉";
+        }
+        break;
+      case 6: // Carrera
+        if(inputVal.toLowerCase() !== "fcb") {
+          valid = false;
+          msg = "No coincide tu carrera 😅";
+        }
+        break;
+      case 7: // Masa atómica
+        if(inputVal !== "192.22") {
+          valid = false;
+          msg = "Dato incorrecto ⚗️";
+        }
+        break;
+      case 8: // Completa la frase
+        if(inputVal.toUpperCase() !== "MALO") {
+          valid = false;
+          msg = "Frase incorrecta 😏";
+        }
+        break;
+      case 9: // Micro-broma
+        // Opcional: acepta cualquier texto
+        break;
     }
 
-    passwordParts.push(inputVal);
-    passwordInput.value = "";
+    if(!valid){
+      passwordMsg.textContent = msg;
+      return; // no avanza
+    }
+
+    // Guardar el valor en el arreglo
+    passwordParts[currentStep] = inputVal;
+
     currentStep++;
 
     if(currentStep < steps.length){
@@ -61,9 +120,7 @@ document.addEventListener("DOMContentLoaded", function(){
     } else {
       passwordScreen.style.display="none";
       finalScreen.style.display="block";
-
-      // Concatenar todos los pasos excepto la contraseña inicial
-      const finalPassword = passwordParts.slice(1).join('');
+      const finalPassword = passwordParts.join('');
       showFinalText(finalPassword === expectedPassword);
     }
   });
@@ -71,6 +128,7 @@ document.addEventListener("DOMContentLoaded", function(){
   function showStep(){
     passwordStep.textContent = steps[currentStep];
     passwordMsg.textContent = "";
+    passwordInput.value = passwordParts[currentStep] || "";
     passwordInput.focus();
   }
 
