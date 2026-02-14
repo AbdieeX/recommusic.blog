@@ -1,97 +1,69 @@
 document.addEventListener("DOMContentLoaded", function(){
-
-  const contador = document.getElementById("contador");
-  const giftBtn = document.getElementById("giftBtn");
   const mainScreen = document.getElementById("mainScreen");
-  const consoleScreen = document.getElementById("consoleScreen");
-  const consoleText = document.getElementById("consoleText");
+  const giftBtn = document.getElementById("giftBtn");
+  const captchaScreen = document.getElementById("captchaScreen");
+  const captchaOptions = document.getElementById("captchaOptions");
+  const captchaBtn = document.getElementById("captchaBtn");
+  const captchaMsg = document.getElementById("captchaMsg");
+  const finalScreen = document.getElementById("finalScreen");
+  const finalText = document.getElementById("finalText");
 
-  /* 🔢 CONTADOR */
-  let numero = 0;
-  const objetivo = 99999;
+  // Emojis para captcha falso
+  const allEmojis = ["🎧","🌮","🎵","🎶","🐔","🎹","💿","🍕","🎼"];
+  const correctEmojis = ["🎵","🎶","🎼"]; // solo estos son correctos
 
-  const intervalo = setInterval(function(){
-    numero += 1500;
+  giftBtn.addEventListener("click", ()=>{
+    mainScreen.style.display="none";
+    captchaScreen.style.display="block";
 
-    if(numero >= objetivo){
-      numero = objetivo;
-      clearInterval(intervalo);
-    }
-
-    contador.textContent = numero.toLocaleString();
-  }, 15);
-
-  /* 🌹 ROSA */
-  const rose =
-"       :                       ..,,..    ...,,..\n" +
-"      ,%,                .. ,#########::#########:,\n" +
-"      :#%%,           ,,:',####%%%%%%##:`::%%%%####,\n" +
-"     ,##%%%%,      ,##%% ,##%%%:::::''%' `::::%%####,\n" +
-"     %###%%;;,   ,###%%:,##%%:::''    '  . .`:::%%###,\n" +
-"    :####%%;;:: ,##%:' ,#%::''   .,,,..    . .`::%%%##,\n" +
-"    %####%;;::,##%:' ,##%''  ,%%########%     . `:::%%##,\n" +
-"    ######:::,##%:',####:  ,##%%:''     `%%,     .`::%%##,\n" +
-"    :#####%:'##%:',#####' ,###%' ,%%%%,%%,'%,     . ::%%###,,..\n" +
-"     #####%:,#%:'#######  %%:'%  %'  `%% %% %%,.     '::%%#######,\n" +
-"     `####%,#%:',####### ::' %   ' ,%%%%%%, ::%%.    . '::%%######\n" +
-"      `###'##%: ######## ,.   %%  %%,   ':: `:%%%  :  . .:::%%###'\n" +
-"      ,,::,###  %%%%%### ::  % %% '%%%,.::: .:%%%   #.  . ::%%%#'\n" +
-",,,:::%%##:;#   `%%%%%## :% ,%, %   ':%%:'  #%%%' ,.:##.  ::%#'\n" +
-"::%%#####% %%:::  :::%%% `%%,'%%     ..,,%####' :%# `::##, ''\n" +
-"###%%::'###%::: .   `:::, `::,,%%%######%%'',::%##' ,:::%##\n" +
-"''''   ,####%:::. .  `::%,     '':%%::' .,::%%%#'   :::%%%##,\n" +
-"      :#%%'##%:::.  . . \"%::,,.. ..,,,,::%%%###'  ,:%%%%####'\n" +
-"     ,###%%'###%:::: . . `::::::::::%%%#####'   ,::%####:'\n" +
-"     %###%%;'###%::::.   .`::%%%%%%%#####:'  ,,::%%##:'\n" +
-"     ####%;:;'####%:::::.   `:%######::'  ,,:::%%###\n" +
-"     %####;:;'######%%::::.           ,::::%%%####'\n" +
-"     `####%;:'`#########%%:::....,,:::%%%#######'\n" +
-"        ;#####;;'..;;:::#########::%%#########:\"'\n" +
-"                       ~~~~``````''''~~~\n\n";
-
-  const commands =
-"> hola no sé que te quiero mucho\n" +
-"> Abdiel\n";
-
-  giftBtn.addEventListener("click", function(){
-
-    giftBtn.disabled = true;
-    giftBtn.innerText = "Cargando regalo...";
-
-    setTimeout(function(){
-      mainScreen.style.display = "none";
-      consoleScreen.classList.add("active");
-      startTyping();
-    }, 800);
+    // Generar emojis como botones
+    captchaOptions.innerHTML="";
+    allEmojis.forEach(e=>{
+      const span=document.createElement("span");
+      span.textContent=e;
+      span.classList.add("captchaEmoji");
+      span.addEventListener("click", ()=>span.classList.toggle("selected"));
+      captchaOptions.appendChild(span);
+    });
   });
 
-  function typeBlock(text, className, speed, callback){
+  captchaBtn.addEventListener("click", ()=>{
+    const selected = Array.from(document.querySelectorAll(".captchaEmoji.selected")).map(s=>s.textContent);
+    const success = correctEmojis.every(e=>selected.includes(e)) && selected.length===correctEmojis.length;
 
-    const div = document.createElement("div");
-    if(className) div.className = className;
-    consoleText.appendChild(div);
+    if(success){
+      captchaScreen.style.display="none";
+      finalScreen.style.display="block";
+      showFinalText();
+    } else {
+      captchaMsg.textContent="ERROR 404 HUMANIDAD NO DETECTADA. Intenta de nuevo 💖";
+      captchaMsg.style.color="#ff4ecd";
+    }
+  });
 
-    let i = 0;
+  function showFinalText(){
+    const lines=[
+      "ok",
+      "ya no es scam",
+      "",
+      "no ganaste una promoción",
+      "pero sí desbloqueaste algo mejor 💌",
+      "",
+      "RecomMusic nunca tuvo promociones",
+      "pero si tuviera una sería recomendarte a ti 🎵",
+      "porque honestamente eres mi canción favorita",
+      "y no pienso saltarla nunca 💛"
+    ];
+    finalText.textContent="";
 
-    function typing(){
-      if(i < text.length){
-        div.textContent += text.charAt(i);
+    let i=0;
+    function typeLine(){
+      if(i<lines.length){
+        finalText.textContent+=lines[i]+"\n";
         i++;
-        setTimeout(typing, speed);
-      } else if(callback){
-        callback();
+        setTimeout(typeLine,350);
       }
     }
-
-    typing();
+    typeLine();
   }
-
-  function startTyping(){
-    consoleText.innerHTML = "";
-
-    typeBlock(rose, "rose", 1, function(){
-      typeBlock(commands, "commands", 15);
-    });
-  }
-
 });

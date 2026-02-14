@@ -1,40 +1,47 @@
-*{
-  box-sizing:border-box;
-}
+*{box-sizing:border-box;}
 
 body{
   margin:0;
-  background:#1e1e2f;
-  color:white;
   font-family:Arial, sans-serif;
   min-height:100vh;
   display:flex;
   justify-content:center;
   align-items:center;
   text-align:center;
-  padding:20px;
-}
-
-#mainScreen{
-  width:100%;
-  max-width:400px;
+  padding:15px;
+  background:#fff;
+  color:#222;
+  flex-direction:column;
 }
 
 h1{
-  font-size:20px;
-  line-height:1.4;
+  font-size:22px;
+  margin-bottom:10px;
 }
 
-#contador{
-  color:#ff4ecd;
-  font-weight:bold;
+h2{
+  font-size:20px;
+  margin-bottom:10px;
+}
+
+p{
+  font-size:16px;
+  line-height:1.4;
+  margin:5px 0;
+}
+
+.small{
+  font-size:12px;
+  color:#666;
+  margin-top:8px;
 }
 
 button{
-  margin-top:20px;
+  margin-top:15px;
   padding:14px 20px;
   font-size:16px;
   width:100%;
+  max-width:350px;
   border:none;
   border-radius:8px;
   background:#ff4ecd;
@@ -42,44 +49,36 @@ button{
   cursor:pointer;
 }
 
-#consoleScreen{
-  position:fixed;
-  inset:0;
-  background:black;
+#captchaScreen, #finalScreen{
   display:none;
-  justify-content:center;
-  align-items:center;
-  padding:15px;
-}
-
-#consoleScreen.active{
-  display:flex;
-}
-
-.consoleBox{
   width:100%;
-  max-width:100%;
+}
+
+#captchaOptions{
   display:flex;
+  flex-wrap:wrap;
   justify-content:center;
-  align-items:center;
-  flex-direction:column;
+  margin:10px 0;
+}
+
+.captchaEmoji{
+  font-size:28px;
+  margin:6px;
+  cursor:pointer;
+  user-select:none;
+}
+
+.captchaEmoji.selected{
+  transform:scale(1.2);
+  background:#ff4ecd33;
+  border-radius:6px;
 }
 
 pre{
-  font-family:Courier, monospace;
-  font-size:8px;        /* 🔥 tamaño pequeño para móvil */
-  line-height:1;
-  white-space:pre-wrap; /* 🔥 se ajusta al ancho */
+  font-family:Arial,sans-serif;
+  font-size:18px;
+  line-height:1.4;
+  white-space:pre-wrap;
   text-align:center;
-  overflow-x:auto;      /* permite scroll si aún queda grande */
-}
-
-.rose{
-  color:#ff2e2e;
-}
-
-.commands{
-  color:#00ff88;
-  margin-top:10px;
-  text-align:center;
+  color:#ff4ecd;
 }
