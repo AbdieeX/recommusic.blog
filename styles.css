@@ -1,88 +1,59 @@
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
-
-body{
-  background: radial-gradient(circle at top, #111, #000);
+body {
+  margin: 0;
   font-family: 'Segoe UI', sans-serif;
-  color:white;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  height:100vh;
-  text-align:center;
-  padding:20px;
+  background: linear-gradient(135deg, #1e1e2f, #2b1055);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
 }
 
-.container{
-  max-width:500px;
-  width:100%;
-  animation: fadeIn 1.2s ease-in-out;
+.screen {
+  text-align: center;
 }
 
-.logo{
-  width:150px;
-  margin-bottom:20px;
+.logo {
+  width: 120px;
+  margin-bottom: 20px;
 }
 
-h1{
-  font-size:3rem;
-  color:#ff2e63;
+.counter {
+  color: #ff4ecd;
+  font-weight: bold;
 }
 
-button{
-  margin-top:20px;
-  padding:12px 25px;
-  font-size:1rem;
-  border:none;
-  border-radius:30px;
-  cursor:pointer;
-  background:linear-gradient(45deg, #ff2e63, #ff6b81);
-  color:white;
-  transition:0.3s;
+button {
+  margin-top: 20px;
+  padding: 12px 25px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  background: #ff4ecd;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
-button:hover{
-  transform:scale(1.05);
-  box-shadow:0 0 15px #ff2e63;
+button:hover {
+  transform: scale(1.05);
+  background: #ff77dd;
 }
 
-.glow{
-  text-shadow: 0 0 10px #ff2e63;
+/* CONSOLA */
+
+.console {
+  background: black;
+  color: #00ff88;
+  font-family: "Courier New", monospace;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  overflow-y: auto;
 }
 
-.rose{
-  font-family: monospace;
-  white-space: pre;
-  color:#ff6b81;
-  margin-top:20px;
-  line-height:1.1;
-  font-size:0.7rem;
-}
-
-@keyframes fadeIn{
-  from{
-    opacity:0;
-    transform:translateY(20px);
-  }
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
-}
-
-@media (max-width: 480px){
-  h1{
-    font-size:2.2rem;
-  }
-
-  .rose{
-    font-size:0.7rem;
-  }
-
-  button{
-    width:100%;
-  }
+.hidden {
+  display: none;
 }

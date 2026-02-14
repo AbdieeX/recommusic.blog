@@ -2,27 +2,23 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>RecomMusic</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <div class="container" id="contenido">
-
-    <!-- Borra esta línea si no quieres logo -->
+  <!-- Pantalla normal -->
+  <div id="mainScreen" class="screen">
     <img src="logo.png" alt="RecomMusic Logo" class="logo">
-
-    <h2 class="glow">🎉 ¡Felicidades!</h2>
-
-    <p>Eres la visitante número</p>
-    <h1 id="contador">00000</h1>
-    <p>de RecomMusic.</p>
-
-    <button onclick="reclamar()">Reclamar mi regalo</button>
-
+    <h1>Eres la visitante número <span class="counter">99999</span> de RecomMusic!</h1>
+    <button id="giftBtn">Pulsa aquí para reclamar tu regalo 🎁</button>
   </div>
 
-  <script src="script.js"></script>
+  <!-- Pantalla consola -->
+  <div id="consoleScreen" class="console hidden">
+    <pre id="consoleText"></pre>
+  </div>
+
+<script src="script.js"></script>
 </body>
 </html>

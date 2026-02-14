@@ -1,30 +1,12 @@
-// Contador animado
-let numero = 0;
-let objetivo = 99999;
-let contador = document.getElementById("contador");
+const giftBtn = document.getElementById("giftBtn");
+const mainScreen = document.getElementById("mainScreen");
+const consoleScreen = document.getElementById("consoleScreen");
+const consoleText = document.getElementById("consoleText");
 
-let intervalo = setInterval(function() {
-  numero += 1234;
-
-  if (numero >= objetivo) {
-    numero = objetivo;
-    clearInterval(intervalo);
-  }
-
-  contador.textContent = numero.toLocaleString();
-}, 20);
-
-
-// ✨ CAMBIA ESTE MENSAJE ✨
-let mensajeFinal = "Feliz 14 ✨\nGracias por ser mi recomendación favorita.";
-
-
-function reclamar(){
-
-  let rosa = `
+const rose = `
        :                       ..,,..    ...,,..
       ,%,                .. ,#########::#########:,
-      :#%%,           ,:,'####%%%%%%##:\`::%%%%####,
+      :#%%,           ,,:',####%%%%%%##:\`::%%%%####,
      ,##%%%%,      ,##%% ,##%%%:::::''%' \`::::%%####,
      %###%%;;,   ,###%%:,##%%:::''    '  . .\`:::%%###,
     :####%%;;:: ,##%:' ,#%::''   .,,,..    . .\`::%%%##,
@@ -48,8 +30,31 @@ function reclamar(){
         ;#####;;'..;;:::#########::%%#########:"'
                        ~~~~\`\`\`\`\`\`''''~~~`;
 
-  document.getElementById("contenido").innerHTML =
-    "<h1>💌 Premio desbloqueado 💌</h1>" +
-    "<div class='rose'>" + rosa + "</div>" +
-    "<p style='margin-top:20px; white-space:pre-line;'>" + mensajeFinal + "</p>";
+giftBtn.addEventListener("click", () => {
+
+  // Simular que se traba
+  giftBtn.innerText = "Cargando regalo...";
+  giftBtn.disabled = true;
+
+  setTimeout(() => {
+    mainScreen.classList.add("hidden");
+    consoleScreen.classList.remove("hidden");
+
+    typeEffect(rose, 10);
+
+  }, 2000);
+});
+
+function typeEffect(text, speed) {
+  let i = 0;
+
+  function typing() {
+    if (i < text.length) {
+      consoleText.textContent += text.charAt(i);
+      i++;
+      setTimeout(typing, speed);
+    }
+  }
+
+  typing();
 }
