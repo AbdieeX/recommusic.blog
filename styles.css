@@ -1,43 +1,88 @@
-body{
+*{
   margin:0;
-  background:black;
-  color:#00ff88;
-  font-family: "Courier New", monospace;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  background: radial-gradient(circle at top, #111, #000);
+  font-family: 'Segoe UI', sans-serif;
+  color:white;
   display:flex;
   justify-content:center;
   align-items:center;
   height:100vh;
+  text-align:center;
   padding:20px;
 }
 
-.terminal{
+.container{
+  max-width:500px;
   width:100%;
-  max-width:600px;
+  animation: fadeIn 1.2s ease-in-out;
+}
+
+.logo{
+  width:150px;
+  margin-bottom:20px;
+}
+
+h1{
+  font-size:3rem;
+  color:#ff2e63;
 }
 
 button{
   margin-top:20px;
-  padding:10px 20px;
-  background:black;
-  border:1px solid #00ff88;
-  color:#00ff88;
+  padding:12px 25px;
+  font-size:1rem;
+  border:none;
+  border-radius:30px;
   cursor:pointer;
-  font-family: inherit;
+  background:linear-gradient(45deg, #ff2e63, #ff6b81);
+  color:white;
   transition:0.3s;
 }
 
 button:hover{
-  background:#00ff88;
-  color:black;
+  transform:scale(1.05);
+  box-shadow:0 0 15px #ff2e63;
 }
 
-.highlight{
-  font-size:1.2rem;
+.glow{
+  text-shadow: 0 0 10px #ff2e63;
 }
 
-/* Responsive */
+.rose{
+  font-family: monospace;
+  white-space: pre;
+  font-size:0.9rem;
+  margin-top:20px;
+  color:#ff6b81;
+  line-height:1.1;
+}
+
+@keyframes fadeIn{
+  from{
+    opacity:0;
+    transform:translateY(20px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
 @media (max-width: 480px){
-  .terminal{
-    font-size:0.9rem;
+  h1{
+    font-size:2.2rem;
+  }
+
+  .rose{
+    font-size:0.7rem;
+  }
+
+  button{
+    width:100%;
   }
 }
