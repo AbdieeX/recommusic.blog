@@ -6,7 +6,6 @@ document.addEventListener("DOMContentLoaded", function(){
   const consoleScreen = document.getElementById("consoleScreen");
   const consoleText = document.getElementById("consoleText");
 
-  /* 🔢 CONTADOR */
   let numero = 0;
   const objetivo = 99999;
 

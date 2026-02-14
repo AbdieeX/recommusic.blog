@@ -63,11 +63,11 @@ button{
 
 pre{
   font-family:Courier, monospace;
-  font-size:10px; /* 🔥 más pequeño para que quepa en móvil */
+  font-size:7px; 
   line-height:1.1;
   white-space:pre;
   text-align:left;
-  overflow-x:auto; /* 🔥 permite scroll horizontal si hace falta */
+  overflow-x:auto;
 }
 
 .rose{
