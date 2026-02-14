@@ -6,53 +6,65 @@ const consoleText = document.getElementById("consoleText");
 const rose = `
        :                       ..,,..    ...,,..
       ,%,                .. ,#########::#########:,
-      :#%%,           ,,:',####%%%%%%##:\`::%%%%####,
-     ,##%%%%,      ,##%% ,##%%%:::::''%' \`::::%%####,
-     %###%%;;,   ,###%%:,##%%:::''    '  . .\`:::%%###,
-    :####%%;;:: ,##%:' ,#%::''   .,,,..    . .\`::%%%##,
-    %####%;;::,##%:' ,##%''  ,%%########%     . \`:::%%##,
-    ######:::,##%:',####:  ,##%%:''     \`%%,     .\`::%%##,
-    :#####%:'##%:',#####' ,###%' ,%%%%,%%,'%,     . ::%%###,,..
-     #####%:,#%:'#######  %%:'%  %'  \`%% %% %%,.     '::%%#######,
-     \`####%,#%:',####### ::' %   ' ,%%%%%%, ::%%.    . '::%%######
-      \`###'##%: ######## ,.   %%  %%,   ':: \`:%%%  :  . .:::%%###'
-      ,,::,###  %%%%%### ::  % %% '%%%,.::: .:%%%   #.  . ::%%%#'
-,,,:::%%##:;#   \`%%%%%## :% ,%, %   ':%%:'  #%%%' ,.:##.  ::%#'
-::%%#####% %%:::  :::%%% \`%%,'%%     ..,,%####' :%# \`::##, ''
-###%%::'###%::: .   \`:::, \`::,,%%%######%%'',::%##' ,:::%##
-''''   ,####%:::. .  \`::%,     '':%%::' .,::%%%#'   :::%%%##,
-      :#%%'##%:::.  . . "%::,,.. ..,,,,::%%%###'  ,:%%%%####'
-     ,###%%'###%:::: . . \`::::::::::%%%#####'   ,::%####:'
-     %###%%;'###%::::.   .\`::%%%%%%%#####:'  ,,::%%##:'
-     ####%;:;'####%:::::.   \`:%######::'  ,,:::%%###
-     %####;:;'######%%::::.           ,::::%%%####'
-     \`####%;:'\`#########%%:::....,,:::%%%#######'
-        ;#####;;'..;;:::#########::%%#########:"'
-                       ~~~~\`\`\`\`\`\`''''~~~`;
+      :#%%,           ,,:',####%%%%%%##::%%%%####,
+     ,##%%%%,      ,##%% ,##%%%:::::''%' :::::%%####,
+     %###%%;;,   ,###%%:,##%%:::''    '  . .:::%%###,
+    :####%%;;:: ,##%:' ,#%::''   .,,,..    . .::%%%##,
+    %####%;;::,##%:' ,##%''  ,%%########%     . :::%%##,
+    ######:::,##%:',####:  ,##%%:''     %% ,     .::%%##,
+                       ~~~~~~~~~~~~~~~
+`;
 
-giftBtn.addEventListener("click", () => {
+const commands = `
+> hola no sé que te quiero mucho
+> Abdiel
+`;
 
-  // Simular que se traba
-  giftBtn.innerText = "Cargando regalo...";
+giftBtn.addEventListener("click", function(){
+
   giftBtn.disabled = true;
+  giftBtn.innerText = "Cargando regalo...";
 
   setTimeout(() => {
     mainScreen.classList.add("hidden");
     consoleScreen.classList.remove("hidden");
 
-    typeEffect(rose, 10);
-
-  }, 2000);
+    typeRose();
+  }, 1000);
 });
 
-function typeEffect(text, speed) {
-  let i = 0;
 
-  function typing() {
-    if (i < text.length) {
-      consoleText.textContent += text.charAt(i);
+function typeRose(){
+  let i = 0;
+  consoleText.innerHTML = "<span class='rose'></span>";
+
+  const roseContainer = document.querySelector(".rose");
+
+  function typing(){
+    if(i < rose.length){
+      roseContainer.textContent += rose[i];
       i++;
-      setTimeout(typing, speed);
+      setTimeout(typing, 8);
+    } else {
+      typeCommands();
+    }
+  }
+
+  typing();
+}
+
+
+function typeCommands(){
+  let i = 0;
+  const cmdContainer = document.createElement("div");
+  cmdContainer.classList.add("commands");
+  consoleText.appendChild(cmdContainer);
+
+  function typing(){
+    if(i < commands.length){
+      cmdContainer.textContent += commands[i];
+      i++;
+      setTimeout(typing, 30);
     }
   }
 
