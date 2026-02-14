@@ -21,16 +21,15 @@ document.addEventListener("DOMContentLoaded", function(){
     "Regla 9: debe tener la palabra 'tortuga'. NO preguntes."
   ];
 
-  let currentStep = 0;
-  let passwordParts = [];
-
+  const stepLengths = [10, 7, 6, 10, 2, 3, 6, 4, 7]; // longitudes de cada paso en expectedPassword
   const expectedPassword = "29/01/2006valeriaTRENCH14/02/202641fcb192.22MALOtortuga";
 
+  let currentStep = 0;
+
   giftBtn.addEventListener("click", ()=>{
-    mainScreen.style.display="none";
-    passwordScreen.style.display="block";
+    mainScreen.style.display = "none";
+    passwordScreen.style.display = "block";
     currentStep = 0;
-    passwordParts = [];
     passwordInput.value = "";
     showStep();
   });
@@ -43,44 +42,27 @@ document.addEventListener("DOMContentLoaded", function(){
       return;
     }
 
-    // Calculamos la posición que corresponde a este paso
-    const prevLength = passwordParts.join('').length;
-    let stepLength = 0;
+    // Calculamos índices en expectedPassword para este paso
+    const start = stepLengths.slice(0, currentStep).reduce((a,b)=>a+b,0);
+    const end = start + stepLengths[currentStep];
+    const expectedStepPart = expectedPassword.slice(start, end);
 
-    // Definimos cuánto mide cada paso en expectedPassword
-    switch(currentStep){
-      case 0: stepLength = "29/01/2006".length; break;
-      case 1: stepLength = "valeria".length; break;
-      case 2: stepLength = "TRENCH".length; break;
-      case 3: stepLength = "14/02/2026".length; break;
-      case 4: stepLength = "41".length; break;
-      case 5: stepLength = "fcb".length; break;
-      case 6: stepLength = "192.22".length; break;
-      case 7: stepLength = "MALO".length; break;
-      case 8: stepLength = "tortuga".length; break;
-    }
-
-    const expectedStepPart = expectedPassword.slice(prevLength, prevLength + stepLength);
-
-    // Validamos que el input acumulativo contenga la parte correcta al final
-    const userStepPart = inputVal.slice(prevLength, prevLength + stepLength);
+    // Tomamos los últimos stepLength caracteres del input
+    const userStepPart = inputVal.slice(-stepLengths[currentStep]);
 
     if(userStepPart !== expectedStepPart){
       passwordMsg.textContent = "Algo no coincide con la parte de la contraseña de este paso 😅";
       return;
     }
 
-    // Guardamos todo el input como el nuevo acumulado
-    passwordParts[currentStep] = inputVal;
     currentStep++;
 
     if(currentStep < steps.length){
       showStep();
     } else {
-      passwordScreen.style.display="none";
-      finalScreen.style.display="block";
-      const finalPassword = passwordParts[passwordParts.length - 1]; // input final ya tiene todo
-      showFinalText(finalPassword === expectedPassword);
+      passwordScreen.style.display = "none";
+      finalScreen.style.display = "block";
+      showFinalText(inputVal === expectedPassword);
     }
   });
 
@@ -111,10 +93,9 @@ document.addEventListener("DOMContentLoaded", function(){
     }
 
     finalText.textContent = "";
-    let i=0;
-
+    let i = 0;
     function typeLine(){
-      if(i<lines.length){
+      if(i < lines.length){
         finalText.textContent += lines[i] + "\n";
         i++;
         setTimeout(typeLine, 350);
