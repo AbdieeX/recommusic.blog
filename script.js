@@ -1,61 +1,56 @@
 document.addEventListener("DOMContentLoaded", function(){
+
   const mainScreen = document.getElementById("mainScreen");
   const giftBtn = document.getElementById("giftBtn");
-  const captchaScreen = document.getElementById("captchaScreen");
-  const captchaOptions = document.getElementById("captchaOptions");
-  const captchaBtn = document.getElementById("captchaBtn");
-  const captchaMsg = document.getElementById("captchaMsg");
+  const argScreen = document.getElementById("argScreen");
+  const pistasContainer = document.getElementById("pistasContainer");
   const finalScreen = document.getElementById("finalScreen");
   const finalText = document.getElementById("finalText");
 
-  // Emojis para captcha falso
-  const allEmojis = ["🎧","🌮","🎵","🎶","🐔","🎹","💿","🍕","🎼"];
-  const correctEmojis = ["🎵","🎶","🎼"]; // solo estos son correctos
+  // Lista de pistas: música, QFB, baile folkrole
+  const pistas = [
+    "💛", "🎵", "🎶", "🎧", // música
+    "🧪", "⚗️", "💊",       // QFB
+    "💃", "🎶🇲🇽"            // folkrole mexicano
+  ];
+  let pistasTocadas = 0;
 
+  // Inicializa el ARG
   giftBtn.addEventListener("click", ()=>{
     mainScreen.style.display="none";
-    captchaScreen.style.display="block";
+    argScreen.style.display="block";
 
-    // Generar emojis como botones
-    captchaOptions.innerHTML="";
-    allEmojis.forEach(e=>{
-      const span=document.createElement("span");
-      span.textContent=e;
-      span.classList.add("captchaEmoji");
-      span.addEventListener("click", ()=>span.classList.toggle("selected"));
-      captchaOptions.appendChild(span);
+    pistas.forEach(p=>{
+      const span = document.createElement("span");
+      span.textContent = p;
+      span.classList.add("pista");
+      span.addEventListener("click", ()=>{
+        if(!span.classList.contains("tocado")){
+          span.classList.add("tocado");
+          pistasTocadas++;
+          // Efecto soft: mini confeti
+          span.textContent = p + " ✨";
+          setTimeout(()=>{span.textContent=p},300);
+          // Si encontró todas → carta final
+          if(pistasTocadas === pistas.length){
+            setTimeout(()=>showFinal(),500);
+          }
+        }
+      });
+      pistasContainer.appendChild(span);
     });
   });
 
-  captchaBtn.addEventListener("click", ()=>{
-    const selected = Array.from(document.querySelectorAll(".captchaEmoji.selected")).map(s=>s.textContent);
-    const success = correctEmojis.every(e=>selected.includes(e)) && selected.length===correctEmojis.length;
-
-    if(success){
-      captchaScreen.style.display="none";
-      finalScreen.style.display="block";
-      showFinalText();
-    } else {
-      captchaMsg.textContent="ERROR 404 HUMANIDAD NO DETECTADA. Intenta de nuevo 💖";
-      captchaMsg.style.color="#ff4ecd";
-    }
-  });
-
-  function showFinalText(){
+  function showFinal(){
+    argScreen.style.display="none";
+    finalScreen.style.display="block";
     const lines=[
-      "ok",
-      "ya no es scam",
-      "",
-      "no ganaste una promoción",
-      "pero sí desbloqueaste algo mejor 💌",
-      "",
-      "RecomMusic nunca tuvo promociones",
-      "pero si tuviera una sería recomendarte a ti 🎵",
-      "porque honestamente eres mi canción favorita",
-      "y no pienso saltarla nunca 💛"
+      "💛 ¡Hola!","",
+      "Solo quería que te divirtieras explorando 🎵",
+      "Eres increíble y me alegra que estés aquí 💌",
+      "Gracias por buscar todas las pistas conmigo 🥰"
     ];
     finalText.textContent="";
-
     let i=0;
     function typeLine(){
       if(i<lines.length){
@@ -66,4 +61,5 @@ document.addEventListener("DOMContentLoaded", function(){
     }
     typeLine();
   }
+
 });
