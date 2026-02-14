@@ -12,24 +12,23 @@ document.addEventListener("DOMContentLoaded", function(){
   // Los 10 pasos del juego
   const steps = [
     "Regla 1: crea tu contraseña inicial (≥7 caracteres, 2 números, 1 caracter especial) 🎯",
-    "Regla 2: debe tener tu fecha de nacimiento 🎂",
-    "Regla 3: ingresa tu nombre completo, no te hagas el misterioso 😎",
-    "Regla 4: mejor álbum de Twenty One Pilots, objetivamente hablando, sé honesta 🎵",
-    "Regla 5: escribe la fecha de hoy, literal, no copies la de Google 🗓️",
-    "Regla 6: la edad de Natalia Lafourcade… no seas fake fan eh 😉",
-    "Regla 7: tu carrera (pero escribela como suena, sin corrector 😅)",
-    "Regla 8: masa atómica de algún elemento, eres FCB no? compruebalo pls ⚗️",
-    "Regla 9: completa la frase: siempre me ganas en todo ____ 😏",
-    "Regla 10: termina la contraseña con una frase divertida o tu micro-broma favorita 😂"
+    "Regla 2: debe tener tu fecha de nacimiento en formato ??/??/???? 🎂",
+    "Regla 3: ingresa tu nombre 'común' en minúsculas",
+    "Regla 4: mejor álbum de Twenty One Pilots en mayúscula 🎵",
+    "Regla 5: debe tener la fecha de hoy en formato ??/??/???? 🗓️",
+    "Regla 6: la edad de Natalia Lafourcade… 😉",
+    "Regla 7: tu carrera mal escrita",
+    "Regla 8: masa atómica del Iridio con dos decimales ⚗️",
+    "Regla 9: completa la frase en mayúsculas: siempre me ganas en todo lo ____",
+    "Regla 10: debe tener la palabra 'tortuga' 🐢"
   ];
 
   let currentStep = 0;
   let passwordParts = [];
 
   // Contraseña final exacta para validar
-  const expectedPassword = "29/01/2006valeriaTRENCH14/02/202641fcb192.22MALO";
+  const expectedPassword = "29/01/2006valeriaTRENCH14/02/202641fcb192.22MALOtortuga";
 
-  // Inicia el juego desde la pantalla inicial
   giftBtn.addEventListener("click", ()=>{
     mainScreen.style.display="none";
     passwordScreen.style.display="block";
@@ -40,78 +39,25 @@ document.addEventListener("DOMContentLoaded", function(){
 
   passwordBtn.addEventListener("click", ()=>{
     const inputVal = passwordInput.value.trim();
-
-    // Validar según el paso actual
-    let valid = true;
-    let msg = "";
-
-    switch(currentStep) {
-      case 0: // Contraseña inicial
-        if(!/^.*(?=.{7,})(?=(?:.*\d){2,})(?=.*[!@#$%^&*-]).*$/.test(inputVal)){
-          valid = false;
-          msg = "Debe tener ≥7 caracteres, 2 números y 1 caracter especial 😅";
-        }
-        break;
-      case 1: // Fecha de nacimiento
-        if(inputVal !== "29/01/2006") { 
-          valid = false;
-          msg = "Fecha incorrecta 😅";
-        }
-        break;
-      case 2: // Nombre completo
-        if(inputVal.toLowerCase() !== "valeria") {
-          valid = false;
-          msg = "No coincide con tu nombre completo 😎";
-        }
-        break;
-      case 3: // Mejor álbum de Twenty One Pilots
-        if(inputVal.toUpperCase() !== "TRENCH") {
-          valid = false;
-          msg = "No es el álbum correcto 🎵";
-        }
-        break;
-      case 4: // Fecha de hoy
-        if(inputVal !== "14/02/2026") {
-          valid = false;
-          msg = "Debes escribir la fecha de hoy literal 🗓️";
-        }
-        break;
-      case 5: // Edad de Natalia Lafourcade
-        if(inputVal !== "41") {
-          valid = false;
-          msg = "Edad incorrecta 😉";
-        }
-        break;
-      case 6: // Carrera
-        if(inputVal.toLowerCase() !== "fcb") {
-          valid = false;
-          msg = "No coincide tu carrera 😅";
-        }
-        break;
-      case 7: // Masa atómica
-        if(inputVal !== "192.22") {
-          valid = false;
-          msg = "Dato incorrecto ⚗️";
-        }
-        break;
-      case 8: // Completa la frase
-        if(inputVal.toUpperCase() !== "MALO") {
-          valid = false;
-          msg = "Frase incorrecta 😏";
-        }
-        break;
-      case 9: // Micro-broma
-        // Opcional: acepta cualquier texto
-        break;
+    
+    if(inputVal.length < 1){
+      passwordMsg.textContent = "Ups, no puede estar vacío 😅";
+      return;
     }
 
-    if(!valid){
-      passwordMsg.textContent = msg;
+    // Guardamos la parte actual en el arreglo
+    passwordParts[currentStep] = inputVal;
+
+    // Construimos la contraseña completa hasta ahora
+    const currentPassword = passwordParts.join('');
+
+    // Verificamos si coincide con la contraseña esperada hasta este punto
+    const expectedUpToNow = expectedPassword.slice(0, currentPassword.length);
+
+    if(currentPassword !== expectedUpToNow){
+      passwordMsg.textContent = "Algo no coincide con la contraseña esperada 😅";
       return; // no avanza
     }
-
-    // Guardar el valor en el arreglo
-    passwordParts[currentStep] = inputVal;
 
     currentStep++;
 
@@ -120,8 +66,7 @@ document.addEventListener("DOMContentLoaded", function(){
     } else {
       passwordScreen.style.display="none";
       finalScreen.style.display="block";
-      const finalPassword = passwordParts.join('');
-      showFinalText(finalPassword === expectedPassword);
+      showFinalText(currentPassword === expectedPassword);
     }
   });
 
