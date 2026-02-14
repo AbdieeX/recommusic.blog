@@ -1,6 +1,8 @@
+*{box-sizing:border-box;}
+
 body{
   margin:0;
-  font-family:Arial,sans-serif;
+  font-family:Arial, sans-serif;
   min-height:100vh;
   display:flex;
   justify-content:center;
@@ -11,9 +13,29 @@ body{
   color:#222;
   flex-direction:column;
 }
-h1{font-size:22px; margin-bottom:10px;}
-h2{font-size:20px; margin-bottom:10px;}
-p{font-size:16px; line-height:1.4; margin:5px 0;}
+
+h1{
+  font-size:22px;
+  margin-bottom:10px;
+}
+
+h2{
+  font-size:20px;
+  margin-bottom:10px;
+}
+
+p{
+  font-size:16px;
+  line-height:1.4;
+  margin:5px 0;
+}
+
+.small{
+  font-size:12px;
+  color:#666;
+  margin-top:8px;
+}
+
 button{
   margin-top:15px;
   padding:14px 20px;
@@ -26,21 +48,32 @@ button{
   color:white;
   cursor:pointer;
 }
-#captchaScreen, #finalScreen{display:none; width:100%;}
-#emojiContainer{
+
+#captchaScreen, #finalScreen{
+  display:none;
+  width:100%;
+}
+
+#captchaOptions{
   display:flex;
   flex-wrap:wrap;
   justify-content:center;
-  margin:15px 0;
+  margin:10px 0;
 }
-.emoji{
-  font-size:32px;
-  margin:8px;
+
+.captchaEmoji{
+  font-size:28px;
+  margin:6px;
   cursor:pointer;
   user-select:none;
-  transition: transform 0.2s;
 }
-.emoji.tocado{transform:scale(1.2);}
+
+.captchaEmoji.selected{
+  transform:scale(1.2);
+  background:#ff4ecd33;
+  border-radius:6px;
+}
+
 pre{
   font-family:Arial,sans-serif;
   font-size:18px;

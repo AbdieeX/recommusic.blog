@@ -8,17 +8,26 @@
 </head>
 <body>
 
+<!-- Pantalla inicial tipo “promo” -->
 <div id="mainScreen">
   <h1>🎉 ¡FELICIDADES! 🎉</h1>
-  <p>Has ganado una pequeña promoción en RecomMusic 🎵</p>
-  <button id="giftBtn">ACTIVAR PROMOCIÓN 🚨</button>
+  <p>Has sido seleccionado como <strong>USUARIO PREMIUM RECOMMUSIC™</strong></p>
+  <p>Has ganado una <strong>PROMOCIÓN GRATIS EN LA PÁGINA 🎵</strong></p>
+  <p>Valor estimado: $9,999,999 MXN</p>
+  <button id="giftBtn">ACTIVAR PROMOCIÓN AHORA 🚨</button>
+  <p class="small">*No es una estafa, probablemente…*</p>
 </div>
 
+<!-- Fase captcha falso -->
 <div id="captchaScreen">
-  <h2>Selecciona los emojis correctos para desbloquear tu regalo 💛</h2>
-  <div id="emojiContainer"></div>
+  <h2>TCHACAP™ — Verificación Musical 🧠</h2>
+  <p>Para activar tu promoción, demuestra que eres humano:</p>
+  <div id="captchaOptions"></div>
+  <button id="captchaBtn">Verificar ✅</button>
+  <p id="captchaMsg"></p>
 </div>
 
+<!-- Fase final: carta adorable -->
 <div id="finalScreen">
   <pre id="finalText"></pre>
 </div>

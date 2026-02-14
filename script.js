@@ -1,60 +1,61 @@
 document.addEventListener("DOMContentLoaded", function(){
-
   const mainScreen = document.getElementById("mainScreen");
   const giftBtn = document.getElementById("giftBtn");
   const captchaScreen = document.getElementById("captchaScreen");
-  const emojiContainer = document.getElementById("emojiContainer");
+  const captchaOptions = document.getElementById("captchaOptions");
+  const captchaBtn = document.getElementById("captchaBtn");
+  const captchaMsg = document.getElementById("captchaMsg");
   const finalScreen = document.getElementById("finalScreen");
   const finalText = document.getElementById("finalText");
 
-  const correctEmojis = ["🎵","🐢","💃"];
-  let selectedEmojis = [];
-
-  // Lista de emojis random (incluye los correctos)
-  const emojis = ["🎵","🐢","💃","🌟","🍕","💌","🎧","🧪","☕","🪐","🐙","🎶"];
+  // Emojis para captcha falso
+  const allEmojis = ["🎧","🌮","🎵","🎶","🐔","🎹","💿","🍕","🎼"];
+  const correctEmojis = ["🎵","🎶","🎼"]; // solo estos son correctos
 
   giftBtn.addEventListener("click", ()=>{
     mainScreen.style.display="none";
     captchaScreen.style.display="block";
 
-    emojis.forEach(e=>{
-      const span = document.createElement("span");
-      span.textContent = e;
-      span.classList.add("emoji");
-      span.addEventListener("click", ()=>{
-        if(!span.classList.contains("tocado")){
-          span.classList.add("tocado");
-          selectedEmojis.push(e);
-
-          if(selectedEmojis.length >= correctEmojis.length){
-            // Verifica si seleccionó los correctos
-            const acertó = correctEmojis.every(c => selectedEmojis.includes(c));
-            if(acertó){
-              setTimeout(()=>showFinal(),300);
-            } else {
-              // Si no acierta, resetea suavemente
-              selectedEmojis = [];
-              document.querySelectorAll(".emoji").forEach(em=>{
-                em.classList.remove("tocado");
-              });
-            }
-          }
-        }
-      });
-      emojiContainer.appendChild(span);
+    // Generar emojis como botones
+    captchaOptions.innerHTML="";
+    allEmojis.forEach(e=>{
+      const span=document.createElement("span");
+      span.textContent=e;
+      span.classList.add("captchaEmoji");
+      span.addEventListener("click", ()=>span.classList.toggle("selected"));
+      captchaOptions.appendChild(span);
     });
   });
 
-  function showFinal(){
-    captchaScreen.style.display="none";
-    finalScreen.style.display="block";
+  captchaBtn.addEventListener("click", ()=>{
+    const selected = Array.from(document.querySelectorAll(".captchaEmoji.selected")).map(s=>s.textContent);
+    const success = correctEmojis.every(e=>selected.includes(e)) && selected.length===correctEmojis.length;
+
+    if(success){
+      captchaScreen.style.display="none";
+      finalScreen.style.display="block";
+      showFinalText();
+    } else {
+      captchaMsg.textContent="ERROR 404 HUMANIDAD NO DETECTADA. Intenta de nuevo 💖";
+      captchaMsg.style.color="#ff4ecd";
+    }
+  });
+
+  function showFinalText(){
     const lines=[
-      "💛 ¡Genial!","",
-      "Has encontrado los emojis correctos 🎵🐢💃",
-      "Gracias por jugar conmigo un ratito 😄",
-      "Eres increíble 💌"
+      "ok",
+      "ya no es scam",
+      "",
+      "no ganaste una promoción",
+      "pero sí desbloqueaste algo mejor 💌",
+      "",
+      "RecomMusic nunca tuvo promociones",
+      "pero si tuviera una sería recomendarte a ti 🎵",
+      "porque honestamente eres mi canción favorita",
+      "y no pienso saltarla nunca 💛"
     ];
     finalText.textContent="";
+
     let i=0;
     function typeLine(){
       if(i<lines.length){
@@ -65,5 +66,4 @@ document.addEventListener("DOMContentLoaded", function(){
     }
     typeLine();
   }
-
 });
