@@ -80,7 +80,7 @@ document.addEventListener("DOMContentLoaded", function(){
       lines.push("¡descubriste la contraseña!");
       lines.push("quise hacerte un pequeño detalle para hoy.");
       lines.push("");
-      lines.push("Lindo 14 de Febrero, Vale. 🩷");
+      lines.push("Lindo 14 de Febrero, Vale. ❤️");
       lines.push("");
       lines.push("gracias por participar en esta tontería que se me ocurrió (no, no es un virus).");
       lines.push("tqmmmm, me encantaría verte más seguido en la uni.");
