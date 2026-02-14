@@ -1,58 +1,75 @@
 document.addEventListener("DOMContentLoaded", function(){
   const mainScreen = document.getElementById("mainScreen");
   const giftBtn = document.getElementById("giftBtn");
-  const captchaScreen = document.getElementById("captchaScreen");
-  const captchaOptions = document.getElementById("captchaOptions");
-  const captchaBtn = document.getElementById("captchaBtn");
-  const captchaMsg = document.getElementById("captchaMsg");
+  const passwordScreen = document.getElementById("passwordScreen");
+  const passwordStep = document.getElementById("passwordStep");
+  const passwordInput = document.getElementById("passwordInput");
+  const passwordBtn = document.getElementById("passwordBtn");
+  const passwordMsg = document.getElementById("passwordMsg");
   const finalScreen = document.getElementById("finalScreen");
   const finalText = document.getElementById("finalText");
 
-  // Emojis para captcha falso
-  const allEmojis = ["🎧","🌮","🎵","🎶","🐔","🎹","💿","🍕","🎼"];
-  const correctEmojis = ["🎵","🎶","🎼"]; // solo estos son correctos
+  const steps = [
+    "Regla 1: debe tener tu fecha de nacimiento 🎂",
+    "Regla 2: ingresa tu nombre completo, no te hagas el misterioso 😎",
+    "Regla 3: mejor álbum de Twenty One Pilots, objetivamente hablando, sé honesta 🎵",
+    "Regla 4: escribe la fecha de hoy, literal, no copies la de Google 🗓️",
+    "Regla 5: la edad de Natalia Lafourcade… no seas fake fan eh 😉",
+    "Regla 6: tu carrera (pero escribela como suena, sin corrector 😅)",
+    "Regla 7: masa atómica de algún elemento, eres FCB no? compruebalo pls ⚗️",
+    "Regla 8: completa la frase: siempre me ganas en todo ____ 😏",
+    "Regla 9: coloca tu emoji secreto favorito que solo yo debería adivinar 🕵️‍♂️",
+    "Regla 10: termina la contraseña con una frase divertida o tu micro-broma favorita 😂"
+  ];
+
+  let currentStep = 0;
+  let passwordParts = [];
 
   giftBtn.addEventListener("click", ()=>{
     mainScreen.style.display="none";
-    captchaScreen.style.display="block";
-
-    // Generar emojis como botones
-    captchaOptions.innerHTML="";
-    allEmojis.forEach(e=>{
-      const span=document.createElement("span");
-      span.textContent=e;
-      span.classList.add("captchaEmoji");
-      span.addEventListener("click", ()=>span.classList.toggle("selected"));
-      captchaOptions.appendChild(span);
-    });
+    passwordScreen.style.display="block";
+    showStep();
   });
 
-  captchaBtn.addEventListener("click", ()=>{
-    const selected = Array.from(document.querySelectorAll(".captchaEmoji.selected")).map(s=>s.textContent);
-    const success = correctEmojis.every(e=>selected.includes(e)) && selected.length===correctEmojis.length;
+  passwordBtn.addEventListener("click", ()=>{
+    const inputVal = passwordInput.value.trim();
+    if(inputVal.length < 1){
+      passwordMsg.textContent = "Ups, no puede estar vacío 😅";
+      return;
+    }
 
-    if(success){
-      captchaScreen.style.display="none";
+    passwordParts.push(inputVal);
+    passwordInput.value = "";
+    currentStep++;
+
+    if(currentStep < steps.length){
+      showStep();
+    } else {
+      passwordScreen.style.display="none";
       finalScreen.style.display="block";
       showFinalText();
-    } else {
-      captchaMsg.textContent="ERROR 404 HUMANIDAD NO DETECTADA. Intenta de nuevo 💖";
-      captchaMsg.style.color="#ff4ecd";
     }
   });
 
+  function showStep(){
+    passwordStep.textContent = steps[currentStep];
+    passwordMsg.textContent = "";
+    passwordInput.focus();
+  }
+
   function showFinalText(){
+    const finalPassword = passwordParts.join('');
     const lines=[
-      "ok",
-      "ya no es scam",
+      "¡Felicidades! 🎉",
+      "Tu contraseña secreta final es:",
+      finalPassword,
       "",
-      "no ganaste una promoción",
-      "pero sí desbloqueaste algo mejor 💌",
+      "No la compartas con nadie…",
+      "aunque si la compartes conmigo está bien 😏",
       "",
-      "RecomMusic nunca tuvo promociones",
-      "pero si tuviera una sería recomendarte a ti 🎵",
-      "porque honestamente eres mi canción favorita",
-      "y no pienso saltarla nunca 💛"
+      "Gracias por jugar al Password Game 💌",
+      "Recuerda: RecomMusic nunca tuvo promociones reales",
+      "pero sí tiene algo mejor… tú 🎵💛"
     ];
     finalText.textContent="";
 
