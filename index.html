@@ -3,22 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RecomMusic</title>
+  <title>RecomMusic Terminal</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-  <div class="container" id="contenido">
+  <div class="terminal" id="contenido">
 
-    <img src="logo.png" alt="RecomMusic Logo" class="logo">
+    <p>> Iniciando RecomMusic...</p>
+    <p>> Analizando tráfico...</p>
+    <p>> Usuario detectado.</p>
+    <br>
 
-    <h2 class="glow">🎉 ¡Felicidades!</h2>
+    <p class="highlight">
+      Eres la visitante número <span id="contador">00000</span>
+    </p>
 
-    <p>Eres la visitante número</p>
-    <h1 id="contador">00000</h1>
-    <p>de RecomMusic.</p>
+    <br>
+    <p>> Pulse el botón para reclamar su regalo.</p>
 
-    <button onclick="reclamar()">Reclamar mi regalo</button>
+    <button onclick="reclamar()">RECLAMAR</button>
 
   </div>
 
